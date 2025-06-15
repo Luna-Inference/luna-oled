@@ -11,9 +11,9 @@ Orange Pi CM5 + Orange Pi OS + Orange Pi CM5 Tablet Board
 - sudo orangepi-config
 - turn on i2c5
 
-2. Follow and install instruction here: https://github.com/lanefu/WiringPi-Python-OP
+2. Follow and install instruction here: https://github.com/thomasvunguyen/WiringPi-Python-OP
 
-Note: This installs on global python, not in a virtual environment
+Note: This allows (and encourage) to use a virtual python environment
 
 3. Connect OLED to CM5 Tablet Board:
 - VCC to 5V
