@@ -44,3 +44,55 @@ Note: This allows (and encourage) to use a virtual python environment
 ```
 sudo myenv/bin/python test.py
 ```
+
+# Service
+```
+sudo cp -r luna-oled.service /etc/systemd/system/luna-oled.service
+
+sudo systemctl daemon-reload          # Reload systemd configurations
+sudo systemctl enable luna-oled.service   # Auto-start on boot
+sudo systemctl start luna-oled.service    # Start service now
+
+sudo systemctl stop luna-oled.service     # Stop the service
+sudo systemctl restart luna-oled.service  # Restart the service
+sudo systemctl disable luna-oled.service  # Remove from boot startup
+
+systemctl status luna-oled.service        # Current status and recent logs
+journalctl -u luna-oled.service          # View all logs for this service
+journalctl -u luna-oled.service -f       # Follow logs in real-time
+journalctl -u luna-oled.service --since today  # View today's logs only
+journalctl -u luna-oled.service --since "2024-01-01" --until "2024-01-02"  # Date range
+```
+
+# Setup for service
+
+```
+# Check if i2c group exists
+getent group i2c || sudo groupadd i2c
+
+# Add luna to i2c group
+sudo usermod -aG i2c luna
+
+# Create udev rule for I2C
+echo 'SUBSYSTEM=="i2c-dev", GROUP="i2c", MODE="0660"' | sudo tee /etc/udev/rules.d/99-i2c.rules
+
+# Reload udev rules
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
+# Verify permissions
+ls -l /dev/i2c-*
+```
+```
+# Reload systemd
+sudo systemctl daemon-reload
+
+# Restart the service
+sudo systemctl restart luna-oled.service
+
+# Check status
+sudo systemctl status luna-oled.service
+
+# View logs
+sudo journalctl -u luna-oled.service -f
+```

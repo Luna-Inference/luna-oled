@@ -1,0 +1,28 @@
+[Unit]
+Description=Luna OLED Display Service
+After=network.target
+StartLimitIntervalSec=100
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=luna
+Group=luna
+WorkingDirectory=/home/luna/luna-oled
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/home/luna/luna-oled/myenv/bin/python /home/luna/luna-oled/display-status.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=luna-oled
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+ReadWritePaths=/dev/i2c-1
+
+[Install]
+WantedBy=multi-user.target
