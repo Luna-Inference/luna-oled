@@ -39,3 +39,8 @@ Note: This allows (and encourage) to use a virtual python environment
 - SDA to SDA (pin 5)
 
 
+# Test
+
+```
+sudo myenv/bin/python test.py
+```

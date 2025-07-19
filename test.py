@@ -9,7 +9,7 @@ import time
 from PIL import Image, ImageDraw, ImageFont
 
 class SSD1306:
-    def __init__(self, i2c_bus=5, i2c_addr=0x3C, width=128, height=64):
+    def __init__(self, i2c_bus=1, i2c_addr=0x3C, width=128, height=64):
         self.bus_num = i2c_bus
         self.addr = i2c_addr
         self.width = width
@@ -128,7 +128,7 @@ def test_basic_display():
     
     try:
         # Create OLED object
-        oled = SSD1306(i2c_bus=5, i2c_addr=0x3C)
+        oled = SSD1306(i2c_bus=1, i2c_addr=0x3C)
         
         # Clear display
         oled.clear()
@@ -181,7 +181,7 @@ def system_monitor():
     print("Press Ctrl+C to stop")
     
     try:
-        oled = SSD1306(i2c_bus=5, i2c_addr=0x3C)
+        oled = SSD1306(i2c_bus=1, i2c_addr=0x3C)
         
         while True:
             # Create image
@@ -234,7 +234,7 @@ def display_thinking_symbol():
     print("Press Ctrl+C to stop")
     
     try:
-        oled = SSD1306(i2c_bus=5, i2c_addr=0x3C)
+        oled = SSD1306(i2c_bus=1, i2c_addr=0x3C)
         
         # Create thinking symbol (brain with thought bubbles)
         image = Image.new('1', (128, 64), 0)
@@ -288,7 +288,7 @@ def display_listening_symbol():
     print("Press Ctrl+C to stop")
     
     try:
-        oled = SSD1306(i2c_bus=5, i2c_addr=0x3C)
+        oled = SSD1306(i2c_bus=1, i2c_addr=0x3C)
         
         # Create listening symbol (ear with sound waves)
         image = Image.new('1', (128, 64), 0)
@@ -345,7 +345,7 @@ def display_speaking_symbol():
     print("Press Ctrl+C to stop")
     
     try:
-        oled = SSD1306(i2c_bus=5, i2c_addr=0x3C)
+        oled = SSD1306(i2c_bus=1, i2c_addr=0x3C)
         
         # Create speaking symbol (face with mouth and sound waves)
         image = Image.new('1', (128, 64), 0)
@@ -405,7 +405,7 @@ def display_silly_face():
     print("Press Ctrl+C to stop")
     
     try:
-        oled = SSD1306(i2c_bus=5, i2c_addr=0x3C)
+        oled = SSD1306(i2c_bus=1, i2c_addr=0x3C)
         
         # Create silly face
         image = Image.new('1', (128, 64), 0)
@@ -459,7 +459,7 @@ def display_surprised_face():
     print("Press Ctrl+C to stop")
     
     try:
-        oled = SSD1306(i2c_bus=5, i2c_addr=0x3C)
+        oled = SSD1306(i2c_bus=1, i2c_addr=0x3C)
         
         # Create surprised face
         image = Image.new('1', (128, 64), 0)
@@ -514,7 +514,7 @@ def display_cool_face():
     print("Press Ctrl+C to stop")
     
     try:
-        oled = SSD1306(i2c_bus=5, i2c_addr=0x3C)
+        oled = SSD1306(i2c_bus=1, i2c_addr=0x3C)
         
         # Create cool face
         image = Image.new('1', (128, 64), 0)
