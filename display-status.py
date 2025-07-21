@@ -254,18 +254,18 @@ def main():
             image = Image.new('1', (oled.width, oled.height), 0)
             draw = ImageDraw.Draw(image)
 
-            if not SERVICE_RUNNING:
-                draw_offline_face(draw)
-                time.sleep(2)
-            elif CONNECTED:
-                display_connection_established_face(draw)
-                time.sleep(2) # Show connected face for 2 seconds then re-evaluate
-            elif GENERATING:
+            if GENERATING:  # Highest priority: inference running
                 draw_running_llm_frame(draw, frame_index)
                 time.sleep(0.02)
-            else: # Service is running, not generating, not connected
+            elif SERVICE_RUNNING:  # Second priority: service running
                 draw_services_ready_frame(draw, frame_index)
                 time.sleep(0.5)
+            elif CONNECTED:  # Third priority: connection
+                display_connection_established_face(draw)
+                time.sleep(2)  # Show connected face for 2 seconds then re-evaluate
+            else:  # Lowest priority: booted/offline
+                draw_offline_face(draw)
+                time.sleep(2)
 
             oled.display_image(image)
             frame_index += 1
